@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>pyterm</title>
+        <script>
+            function post(url,data){
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST',url,true);
+                xhr.send(data);
+                xhr.onload = function(){
+                    console.log(this.responseText);
+                    document.getElementById('out').innerText = this.responseText;
+                }
+            }
+            function run(){
+		var cmd = `{"cmd":"${document.getElementById('text').value}"}`;
+		console.log(cmd);
+                post('/run',cmd);
+            }
+        </script>
+    </head>
+    <body>
+        <textarea id = "text">type code here</textarea>
+        <br>
+        <button onclick = 'run()'>Run</button>
+        <br>
+        <p id = "out"></p>
+    </body>
+</html>
